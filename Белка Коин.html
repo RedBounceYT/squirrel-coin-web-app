@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Белка Коин</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Добро пожаловать в Белка Коин!</h1>
+    <p id="balance">Твой баланс: 0 Белка Коинов</p>
+    <button onclick="earnCoins()">Заработать Белка Коины</button>
+    <p id="message"></p>
+
+    <script>
+        let coins = 0;
+
+        // Проверка наличия Telegram Web App API
+        const tg = window.Telegram.WebApp;
+
+        function earnCoins() {
+            coins += Math.floor(Math.random() * 10) + 1;
+            document.getElementById('balance').innerText = `Твой баланс: ${coins} Белка Коинов`;
+            document.getElementById('message').innerText = 'Ты заработал Белка Коины!';
+
+            // Отправка данных в Telegram через Web App API
+            tg.sendData(JSON.stringify({coins: coins}));
+        }
+
+        // Инициализация WebApp
+        tg.ready();
+    </script>
+</body>
+</html>
